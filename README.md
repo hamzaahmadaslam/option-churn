@@ -31,8 +31,8 @@ function that made it. A transient's timeout row is counted with the transient.
 
 It stores running totals only: option names, key names, callers, counts and sizes. **It never stores option
 values.** Totals live in three tables (`{prefix}option_churn_requests`, `_writes` and `_keys`), not in options, so the
-plugin does not add to what it measures. Each request adds one row per option and caller it touched, in a few
-statements at shutdown.
+plugin does not add to what it measures. At shutdown, each request adds its counts to the totals of each option and
+caller it touched (a row is created the first time), in a few statements.
 
 ## Install
 
