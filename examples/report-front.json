@@ -1,0 +1,75 @@
+{
+    "requests": {
+        "front": 20
+    },
+    "rows": [
+        {
+            "option": "_transient_acme_menu_cache",
+            "type": "front",
+            "requests": 20,
+            "write_requests": 20,
+            "writes": 20,
+            "noop_calls": 0,
+            "bytes": 758,
+            "callers": {
+                "mu-plugin:churn-fixture.php {closure}": 20
+            },
+            "autoload": "off",
+            "autoloaded": false,
+            "share": 1,
+            "changed_keys": {
+                "built": 20
+            }
+        },
+        {
+            "option": "acme_heartbeat",
+            "type": "front",
+            "requests": 20,
+            "write_requests": 20,
+            "writes": 20,
+            "noop_calls": 0,
+            "bytes": 1218,
+            "callers": {
+                "mu-plugin:churn-fixture.php {closure}": 20
+            },
+            "autoload": "off",
+            "autoloaded": false,
+            "share": 1,
+            "changed_keys": {
+                "last": 20
+            }
+        },
+        {
+            "option": "acme_static",
+            "type": "front",
+            "requests": 20,
+            "write_requests": 0,
+            "writes": 0,
+            "noop_calls": 20,
+            "bytes": 0,
+            "callers": {
+                "mu-plugin:churn-fixture.php {closure}": 20
+            },
+            "autoload": "auto",
+            "autoloaded": true,
+            "share": 0,
+            "changed_keys": []
+        },
+        {
+            "option": "rewrite_rules",
+            "type": "front",
+            "requests": 20,
+            "write_requests": 0,
+            "writes": 0,
+            "noop_calls": 20,
+            "bytes": 0,
+            "callers": {
+                "core WP_Rewrite::refresh_rewrite_rules": 20
+            },
+            "autoload": "on",
+            "autoloaded": true,
+            "share": 0,
+            "changed_keys": []
+        }
+    ]
+}

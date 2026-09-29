@@ -1,0 +1,5 @@
+option	type	written_on	writes	noop_calls	bytes_each	autoload	top_caller	changed_keys
+_transient_acme_menu_cache	front	20 of 20 requests (100%)	20	0	38	off	mu-plugin:churn-fixture.php {closure}	built 100%
+acme_heartbeat	front	20 of 20 requests (100%)	20	0	61	off	mu-plugin:churn-fixture.php {closure}	last 100%
+acme_static	front	0 of 20 requests (0%)	0	20	0	auto	mu-plugin:churn-fixture.php {closure}	
+rewrite_rules	front	0 of 20 requests (0%)	0	20	0	on	core WP_Rewrite::refresh_rewrite_rules	
