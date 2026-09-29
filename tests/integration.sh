@@ -41,9 +41,13 @@ wpc option-churn reset --yes >/dev/null
 check "the three tables exist" "3" "$(wpc eval 'global $wpdb; echo count($wpdb->get_col("SHOW TABLES LIKE \"{$wpdb->base_prefix}option_churn_%\""));')"
 
 # Five front-end page views through PHP's built-in server.
-php -S "127.0.0.1:$port" -t "$WP_PATH" >/dev/null 2>&1 &
-server=$!
-for _ in $(seq 1 30); do curl -s -o /dev/null "http://127.0.0.1:$port/" && break; sleep 0.2; done
+# Opcache off: the server must see wp-config.php changes made during the test.
+start_server() {
+  php -d opcache.enable_cli=0 -S "127.0.0.1:$port" -t "$WP_PATH" >/dev/null 2>&1 &
+  server=$!
+  for _ in $(seq 1 30); do curl -s -o /dev/null "http://127.0.0.1:$port/" && break; sleep 0.2; done
+}
+start_server
 wpc option-churn reset --yes >/dev/null
 for _ in 1 2 3 4 5; do curl -s -o /dev/null -H "Host: localhost" "http://127.0.0.1:$port/"; done
 # Two WP-CLI runs.
@@ -72,6 +76,9 @@ values="$(wpc eval 'global $wpdb; echo (int) $wpdb->get_var("SELECT COUNT(*) FRO
 check "no option values are stored" "0" "$values"
 
 wpc config set OPTION_CHURN_RECORD false --raw --type=constant >/dev/null
+kill "$server" 2>/dev/null || true
+wait "$server" 2>/dev/null || true
+start_server
 wpc option-churn reset --yes >/dev/null
 for _ in 1 2; do curl -s -o /dev/null -H "Host: localhost" "http://127.0.0.1:$port/"; done
 wpc config delete OPTION_CHURN_RECORD --type=constant >/dev/null
